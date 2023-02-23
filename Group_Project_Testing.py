@@ -179,26 +179,25 @@ plt.ylabel('RMSE')
 
 
 ########### NEW  ########### 2/22 7pm
-dropped_train = []
-dropped_test = []
+
 compared_rmse = []
 finalized = X_train
 final_test = X_test
-picked_reg = 2
+picked_reg = regr
 
 
 
 for i in range(0, finalized.shape[1]):
-    dropped_train = []
-    dropped_test = []
     if i == 0:
         dropped_train = finalized[:,1:]
         dropped_test = final_test[:,1:]
     else:
-        dropped_train = finalized[:,:i].concatenate(finalized[:,(i + 1):])
-        dropped_test = final_test[:,:i].concatenate(final_test[:,(i + 1):])
+        dropped_train = finalized[:,:i].vstack(finalized[:,(i + 1):])
+        dropped_test = final_test[:,:i].vstack(final_test[:,(i + 1):])
     ## get rmse and add to compared_rmse
-    compared_rmse.concatenate(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
+    compared_rmse.append(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
+    dropped_train = []
+    dropped_test = []
 ################################
 
 
