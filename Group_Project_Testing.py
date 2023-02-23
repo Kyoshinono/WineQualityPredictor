@@ -193,7 +193,7 @@ for i in range(0, finalized.shape[1]):
         dropped_test = final_test[:,1:]
     else:
         dropped_train = np.delete(finalized, i, 1)
-        dropped_test = np.delete(finalized, i, 1)
+        dropped_test = np.delete(final_test, i, 1)
     ## get rmse and add to compared_rmse
     compared_rmse.append(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
 ################################
