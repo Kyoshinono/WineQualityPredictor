@@ -255,6 +255,7 @@ def selected_features(model, Xdata = X, ydata = y):
     #####
     rmse_previous = 1
     counter = 0
+    model.fit(Xdata,ydata)
     ######
     while len(selected) <= n:
         # find the single features that works best in conjunction
