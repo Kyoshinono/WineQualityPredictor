@@ -184,21 +184,23 @@ plt.ylabel('RMSE')
 
 
 
-########### NEW  ########### 2/23 815pm
+########### NEW  ########### 2/23 945pm
 dropped_linear_rmse = []
 selected_linear_rmse = []
 dropped_knn_rmse = []
 selected_knn_rmse = []
+wdropped_knn_rmse = []
+wselected_knn_rmse = []
 dropped__rmse = []
 selected__rmse = []
 finalized = X_train
 final_test = X_test
 dropped_linear = LinearRegression()
 sel_linear = LinearRegression()
-#dropped_knn = 
-#sel_knn = 
-
-
+dropped_knn = KNeighborsRegressor(n_neighbors=7, algorithm='brute')
+sel_knn = KNeighborsRegressor(n_neighbors=7, algorithm='brute')
+wdropped_knn = KNeighborsRegressor(n_neighbors=13, algorithm='brute', weights='distance')
+wsel_knn = KNeighborsRegressor(n_neighbors=13, algorithm='brute', weights='distance')
 
 
 for i in range(0, finalized.shape[1]):
@@ -216,15 +218,22 @@ for i in range(0, finalized.shape[1]):
     selected_linear_rmse.append(g_train_test_rmse(sel_linear, selected_train, selected_test, y_train, y_test))
     #### add any regression down here below
     #### and use selected / dropped on it
-    #dropped_knn_rmse.append(g_train_test_rmse(dropped_knn, dropped_train, dropped_test, y_train, y_test))
-    #selected_knn_rmse.append(g_train_test_rmse(sel_knn, selected_train, selected_test, y_train, y_test))
+    dropped_knn_rmse.append(g_train_test_rmse(dropped_knn, dropped_train, dropped_test, y_train, y_test))
+    selected_knn_rmse.append(g_train_test_rmse(sel_knn, selected_train, selected_test, y_train, y_test))
+    wdropped_knn_rmse.append(g_train_test_rmse(wdropped_knn, dropped_train, dropped_test, y_train, y_test))
+    wselected_knn_rmse.append(g_train_test_rmse(wsel_knn, selected_train, selected_test, y_train, y_test))
 dropped_linear_rmse
 selected_linear_rmse
+dropped_knn_rmse
+selected_knn_rmse
+wdropped_knn_rmse
+wselected_knn_rmse
 ################################
 
 # Plotting the selected_compared_rmse
-plt.plot(selected_compared_rmse)
+plt.plot(selected_linear_rmse)
 display_names('Features', 'RMSE', 'Feature versus RMSE')
+
 
 
 
