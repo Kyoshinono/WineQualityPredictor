@@ -184,13 +184,20 @@ plt.ylabel('RMSE')
 
 
 
-########### NEW  ########### 2/22 815pm
-dropped_compared_rmse = []
-selected_compared_rmse = []
+########### NEW  ########### 2/23 815pm
+dropped_linear_rmse = []
+selected_linear_rmse = []
+dropped_knn_rmse = []
+selected_knn_rmse = []
+dropped__rmse = []
+selected__rmse = []
 finalized = X_train
 final_test = X_test
-picked_reg = regr # add any type of regression
-sel_reg = LinearRegression()
+dropped_linear = LinearRegression()
+sel_linear = LinearRegression()
+#dropped_knn = 
+#sel_knn = 
+
 
 
 
@@ -205,12 +212,14 @@ for i in range(0, finalized.shape[1]):
     selected_train = finalized[:,i].reshape((-1,1))
     selected_test = final_test[:,i].reshape((-1,1))
     ## get rmse and add to compared_rmse
-    dropped_compared_rmse.append(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
-    selected_compared_rmse.append(g_train_test_rmse(sel_reg, selected_train, selected_test, y_train, y_test))
+    dropped_linear_rmse.append(g_train_test_rmse(dropped_linear, dropped_train, dropped_test, y_train, y_test))
+    selected_linear_rmse.append(g_train_test_rmse(sel_linear, selected_train, selected_test, y_train, y_test))
     #### add any regression down here below
     #### and use selected / dropped on it
-dropped_compared_rmse
-selected_compared_rmse
+    #dropped_knn_rmse.append(g_train_test_rmse(dropped_knn, dropped_train, dropped_test, y_train, y_test))
+    #selected_knn_rmse.append(g_train_test_rmse(sel_knn, selected_train, selected_test, y_train, y_test))
+dropped_linear_rmse
+selected_linear_rmse
 ################################
 
 # Plotting the selected_compared_rmse
