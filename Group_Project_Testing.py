@@ -275,7 +275,7 @@ def selected_features(model, Xdata = X, ydata = y):
             if rmse_curr < rmse_min:
                 rmse_min = rmse_curr
                 i_min = i
-                print(i_min)
+                #print(i_min)
         remaining.remove(i_min)
         selected.append(i_min)
         #############
