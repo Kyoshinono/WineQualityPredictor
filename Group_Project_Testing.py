@@ -289,6 +289,13 @@ def selected_features(model, Xdata = X, ydata = y):
     #return selected ############
 ###############
 
+########### NEW ############ 2/24 4pm
+def get_features(selected_list):
+    returned_predictors = []
+    for i in selected_list:
+        returned_predictors.append(predictors[i])
+    return returned_predictors
+#################
 
 
 
