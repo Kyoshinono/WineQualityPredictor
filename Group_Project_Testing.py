@@ -252,6 +252,10 @@ def selected_features(model, Xdata = X, ydata = y):
     remaining = list(range(Xdata.shape[1]))
     selected = []
     n = 10
+    #####
+    rmse_previous = 1
+    counter = 0
+    ######
     while len(selected) <= n:
         # find the single features that works best in conjunction
         # with the already selected features
@@ -274,8 +278,13 @@ def selected_features(model, Xdata = X, ydata = y):
                 print(i_min)
         remaining.remove(i_min)
         selected.append(i_min)
+        #############
+        if (rmse_previous - rmse_compared) < .005:
+            counter = counter + 1
+        rmse_previous = rmse_compared
         #print('num features: {}; rmse: {:.9f}'.format(len(selected), rmse_min))
-    return selected
+    return selected[:counter]
+    #return selected ############
 ###############
 
 
