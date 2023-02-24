@@ -230,8 +230,9 @@ dropped_compared_rmse
 selected_compared_rmse
 ################################
 
-
-
+# Plotting the selected_compared_rmse
+plt.plot(selected_compared_rmse)
+display_names('Features', 'RMSE', 'Feature versus RMSE')
 
 
 
