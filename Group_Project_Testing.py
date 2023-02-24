@@ -169,9 +169,11 @@ best_k, best_rmse = get_best(ks, test_rmse)
 wbest_k, wbest_rmse = get_best(ks, wtest_rmse)
 
 
-
-plt.plot(test_rmse)
-plt.plot(wtest_rmse)
+df = pd.DataFrame()
+df['test'] = pd.Series(test_rmse)
+df['wtest'] = pd.Series(wtest_rmse)
+df = df.set_index(ks)
+df[['test','wtest']].plot()
 plt.xlabel('K')
 plt.ylabel('RMSE')
 
