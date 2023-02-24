@@ -279,6 +279,7 @@ def selected_features(model, Xdata = X, ydata = y):
         remaining.remove(i_min)
         selected.append(i_min)
         #############
+        rmse_compared = np.sqrt(-scores.mean())
         if (rmse_previous - rmse_compared) > .005:
             counter = counter + 1
         rmse_previous = rmse_compared
