@@ -178,27 +178,6 @@ plt.ylabel('RMSE')
 
 
 
-########### NEW  ########### 2/22 7pm
-
-compared_rmse = []
-finalized = X_train
-final_test = X_test
-picked_reg = regr
-
-
-
-for i in range(0, finalized.shape[1]):
-    if i == 0:
-        dropped_train = finalized[:,1:]
-        dropped_test = final_test[:,1:]
-    else:
-        dropped_train = np.delete(finalized, i, 1)
-        dropped_test = np.delete(final_test, i, 1)
-    ## get rmse and add to compared_rmse
-    compared_rmse.append(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
-#############FINISHED 7/22 8pm###################
-################################
-
 
 
 
@@ -208,7 +187,7 @@ dropped_compared_rmse = []
 selected_compared_rmse = []
 finalized = X_train
 final_test = X_test
-picked_reg = regr
+picked_reg = regr # add any type of regression
 sel_reg = LinearRegression()
 
 
@@ -226,6 +205,8 @@ for i in range(0, finalized.shape[1]):
     ## get rmse and add to compared_rmse
     dropped_compared_rmse.append(g_train_test_rmse(picked_reg, dropped_train, dropped_test, y_train, y_test))
     selected_compared_rmse.append(g_train_test_rmse(sel_reg, selected_train, selected_test, y_train, y_test))
+    #### add any regression down here below
+    #### and use selected / dropped on it
 dropped_compared_rmse
 selected_compared_rmse
 ################################
