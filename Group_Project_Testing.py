@@ -247,7 +247,36 @@ graph = graphviz.Source(dot_data)
 display(graph)
 
 
-
+########## NEW ########### 2/24 250PM
+def selected_features(model, Xdata = X, ydata = y):
+    remaining = list(range(Xdata.shape[1]))
+    selected = []
+    n = 10
+    while len(selected) <= n:
+        # find the single features that works best in conjunction
+        # with the already selected features
+        rmse_min = 1e7
+        for i in remaining:
+            # make a version of the training data with just feature x
+            selected.append(i)
+            X_curr = Xdata[:,selected]
+            selected.remove(i)
+            
+            # compute negated mean square error scores using 5-fold cross validation
+            scores = cross_val_score(model, X_curr, ydata, scoring='neg_mean_squared_error', cv=5)
+            
+            # work out the average root mean squared error.  We need to
+            # first negate the scores, because they are negative MSE, not MSE.
+            rmse_curr = np.sqrt(-scores.mean())
+            if rmse_curr < rmse_min:
+                rmse_min = rmse_curr
+                i_min = i
+                print(i_min)
+        remaining.remove(i_min)
+        selected.append(i_min)
+        #print('num features: {}; rmse: {:.9f}'.format(len(selected), rmse_min))
+    return selected
+###############
 
 
 
