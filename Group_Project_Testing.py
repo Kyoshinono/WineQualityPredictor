@@ -234,7 +234,17 @@ wselected_knn_rmse
 plt.plot(selected_linear_rmse)
 display_names('Features', 'RMSE', 'Feature versus RMSE')
 
+# DecisionTreeRegressor
+from sklearn.tree import DecisionTreeRegressor, export_graphviz
+import graphviz
 
+#TODO 
+#Might need a scatterplot to show the splits and the mean between the splits
+clf = DecisionTreeRegressor(max_depth=(3), random_state = 0)
+clf.fit(X_train, y_train)
+dot_data = export_graphviz(clf, precision = 2, feature_names = predictors, proportion = True, class_names = 'quality', filled = True, rounded = True, special_characters = True)
+graph = graphviz.Source(dot_data)
+display(graph)
 
 
 
